@@ -4,6 +4,7 @@
          :pivot-y="0.2"
          :width="400"
          :height="300"
+         :clickToClose="true"
          @before-open="beforeOpen"
          @before-close="beforeClose">
     <div class="error-modal-content">

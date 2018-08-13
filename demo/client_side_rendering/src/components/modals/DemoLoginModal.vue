@@ -1,5 +1,6 @@
 <template>
-<modal name="demo-login" transition="pop-out" :width="modalWidth" :height="400">
+<modal name="demo-login" transition="pop-out" :width="modalWidth" :height="400"
+       :clickToClose="true">
   <div class="box">
     <div class="box-part" id="bp-left">
       <div class="partition" id="partition-register">

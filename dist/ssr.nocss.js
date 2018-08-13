@@ -63,7 +63,7 @@
         Object.defineProperty(exports, "__esModule", {
             value: !0
         });
-        var _Modal = __webpack_require__(4), _Modal2 = _interopRequireDefault(_Modal), _Dialog = __webpack_require__(3), _Dialog2 = _interopRequireDefault(_Dialog), _ModalsContainer = __webpack_require__(5), _ModalsContainer2 = _interopRequireDefault(_ModalsContainer), Plugin = {
+        var _Modal = __webpack_require__(4), _Modal2 = _interopRequireDefault(_Modal), _Dialog = __webpack_require__(3), _Dialog2 = _interopRequireDefault(_Dialog), _jfDialog = __webpack_require__(6), _jfDialog2 = _interopRequireDefault(_jfDialog), _ModalsContainer = __webpack_require__(5), _ModalsContainer2 = _interopRequireDefault(_ModalsContainer), Plugin = {
             install: function(Vue) {
                 var options = arguments.length > 1 && void 0 !== arguments[1] ? arguments[1] : {};
                 if (!this.installed && (this.installed = !0, this.event = new Vue(), this.dynamicContainer = null, 
@@ -81,8 +81,8 @@
                     toggle: function(name, params) {
                         Plugin.event.$emit("toggle", name, void 0, params);
                     }
-                }, Vue.component(this.componentName, _Modal2.default), options.dialog && Vue.component("v-dialog", _Dialog2.default), 
-                options.dynamic)) if (options.injectModalsContainer) {
+                }, Vue.component(this.componentName, _Modal2.default), options.dialog && (Vue.component("v-dialog", _Dialog2.default), 
+                Vue.component("jf-dialog", _jfDialog2.default)), options.dynamic)) if (options.injectModalsContainer) {
                     var modalsContainer = document.createElement("div");
                     document.body.appendChild(modalsContainer), new Vue({
                         render: function(h) {
@@ -105,27 +105,35 @@
             inRange: inRange
         };
     }, function(module, exports, __webpack_require__) {
-        __webpack_require__(11);
-        var Component = __webpack_require__(0)(__webpack_require__(6), __webpack_require__(16), null, null);
-        Component.options.__file = "/Users/yev.vlasenko2/Projects/vue/vue-js-modal/src/Dialog.vue", 
+        __webpack_require__(14);
+        var Component = __webpack_require__(0)(__webpack_require__(7), __webpack_require__(20), null, null);
+        Component.options.__file = "E:\\may\\learning\\project\\may-vue-js-modal\\src\\Dialog.vue", 
         Component.esModule && Object.keys(Component.esModule).some(function(key) {
             return "default" !== key && "__esModule" !== key;
         }) && console.error("named exports are not supported in *.vue files."), Component.options.functional && console.error("[vue-loader] Dialog.vue: functional components are not supported with templates, they should use render functions."), 
         module.exports = Component.exports;
     }, function(module, exports, __webpack_require__) {
-        __webpack_require__(12);
-        var Component = __webpack_require__(0)(__webpack_require__(7), __webpack_require__(17), null, null);
-        Component.options.__file = "/Users/yev.vlasenko2/Projects/vue/vue-js-modal/src/Modal.vue", 
+        __webpack_require__(15);
+        var Component = __webpack_require__(0)(__webpack_require__(8), __webpack_require__(21), null, null);
+        Component.options.__file = "E:\\may\\learning\\project\\may-vue-js-modal\\src\\Modal.vue", 
         Component.esModule && Object.keys(Component.esModule).some(function(key) {
             return "default" !== key && "__esModule" !== key;
         }) && console.error("named exports are not supported in *.vue files."), Component.options.functional && console.error("[vue-loader] Modal.vue: functional components are not supported with templates, they should use render functions."), 
         module.exports = Component.exports;
     }, function(module, exports, __webpack_require__) {
-        var Component = __webpack_require__(0)(__webpack_require__(8), __webpack_require__(15), null, null);
-        Component.options.__file = "/Users/yev.vlasenko2/Projects/vue/vue-js-modal/src/ModalsContainer.vue", 
+        var Component = __webpack_require__(0)(__webpack_require__(9), __webpack_require__(18), null, null);
+        Component.options.__file = "E:\\may\\learning\\project\\may-vue-js-modal\\src\\ModalsContainer.vue", 
         Component.esModule && Object.keys(Component.esModule).some(function(key) {
             return "default" !== key && "__esModule" !== key;
         }) && console.error("named exports are not supported in *.vue files."), Component.options.functional && console.error("[vue-loader] ModalsContainer.vue: functional components are not supported with templates, they should use render functions."), 
+        module.exports = Component.exports;
+    }, function(module, exports, __webpack_require__) {
+        __webpack_require__(13);
+        var Component = __webpack_require__(0)(__webpack_require__(11), __webpack_require__(19), null, null);
+        Component.options.__file = "E:\\may\\learning\\project\\may-vue-js-modal\\src\\jfDialog.vue", 
+        Component.esModule && Object.keys(Component.esModule).some(function(key) {
+            return "default" !== key && "__esModule" !== key;
+        }) && console.error("named exports are not supported in *.vue files."), Component.options.functional && console.error("[vue-loader] jfDialog.vue: functional components are not supported with templates, they should use render functions."), 
         module.exports = Component.exports;
     }, function(module, exports, __webpack_require__) {
         "use strict";
@@ -199,7 +207,7 @@
         Object.defineProperty(exports, "__esModule", {
             value: !0
         });
-        var _index = __webpack_require__(1), _index2 = _interopRequireDefault(_index), _Resizer = __webpack_require__(14), _Resizer2 = _interopRequireDefault(_Resizer), _util = __webpack_require__(2), _parser = __webpack_require__(10);
+        var _index = __webpack_require__(1), _index2 = _interopRequireDefault(_index), _Resizer = __webpack_require__(17), _Resizer2 = _interopRequireDefault(_Resizer), _util = __webpack_require__(2), _parser = __webpack_require__(12);
         exports.default = {
             name: "VueJsModal",
             props: {
@@ -611,6 +619,68 @@
         "use strict";
         Object.defineProperty(exports, "__esModule", {
             value: !0
+        }), exports.default = {
+            name: "VueJsJfDialog",
+            props: {
+                width: {
+                    type: [ Number, String ],
+                    default: 400
+                },
+                clickToClose: {
+                    type: Boolean,
+                    default: !0
+                },
+                transition: {
+                    type: String,
+                    default: "fade"
+                }
+            },
+            data: function() {
+                return {
+                    params: {},
+                    defaultButtons: [ {
+                        title: "CLOSE"
+                    } ]
+                };
+            },
+            computed: {
+                buttons: function() {
+                    return this.params.buttons || this.defaultButtons;
+                },
+                buttonStyle: function() {
+                    return {
+                        flex: "1 1 " + 100 / this.buttons.length + "%"
+                    };
+                }
+            },
+            methods: {
+                beforeOpened: function(event) {
+                    window.addEventListener("keyup", this.onKeyUp), this.params = event.params || {}, 
+                    this.$emit("before-opened", event);
+                },
+                beforeClosed: function(event) {
+                    window.removeEventListener("keyup", this.onKeyUp), this.params = {}, this.$emit("before-closed", event);
+                },
+                click: function(i, event) {
+                    var source = arguments.length > 2 && void 0 !== arguments[2] ? arguments[2] : "click", button = this.buttons[i];
+                    button && "function" == typeof button.handler ? button.handler(i, event, {
+                        source: source
+                    }) : this.$modal.hide("jf-dialog");
+                },
+                onKeyUp: function(event) {
+                    if (13 === event.which && this.buttons.length > 0) {
+                        var buttonIndex = 1 === this.buttons.length ? 0 : this.buttons.findIndex(function(button) {
+                            return button.default;
+                        });
+                        -1 !== buttonIndex && this.click(buttonIndex, event, "keypress");
+                    }
+                }
+            }
+        };
+    }, function(module, exports, __webpack_require__) {
+        "use strict";
+        Object.defineProperty(exports, "__esModule", {
+            value: !0
         });
         var _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function(obj) {
             return typeof obj;
@@ -666,10 +736,10 @@
             }
             return value >= 0;
         };
-    }, function(module, exports) {}, function(module, exports) {}, function(module, exports) {}, function(module, exports, __webpack_require__) {
-        __webpack_require__(13);
-        var Component = __webpack_require__(0)(__webpack_require__(9), __webpack_require__(18), null, null);
-        Component.options.__file = "/Users/yev.vlasenko2/Projects/vue/vue-js-modal/src/Resizer.vue", 
+    }, function(module, exports) {}, function(module, exports) {}, function(module, exports) {}, function(module, exports) {}, function(module, exports, __webpack_require__) {
+        __webpack_require__(16);
+        var Component = __webpack_require__(0)(__webpack_require__(10), __webpack_require__(22), null, null);
+        Component.options.__file = "E:\\may\\learning\\project\\may-vue-js-modal\\src\\Resizer.vue", 
         Component.esModule && Object.keys(Component.esModule).some(function(key) {
             return "default" !== key && "__esModule" !== key;
         }) && console.error("named exports are not supported in *.vue files."), Component.options.functional && console.error("[vue-loader] Resizer.vue: functional components are not supported with templates, they should use render functions."), 
@@ -699,6 +769,82 @@
                         }
                     }, "component", modal.params, !1), _vm.$listeners)) ], 1);
                 }));
+            },
+            staticRenderFns: []
+        }, module.exports.render._withStripped = !0;
+    }, function(module, exports) {
+        module.exports = {
+            render: function() {
+                var _vm = this, _h = _vm.$createElement, _c = _vm._self._c || _h;
+                return _c("modal", {
+                    attrs: {
+                        name: "jf-dialog",
+                        height: "auto",
+                        classes: [ "v--modal", "vue-dialog", "jf-dialog", this.params.class ],
+                        width: _vm.width,
+                        "pivot-y": .3,
+                        adaptive: !0,
+                        clickToClose: _vm.clickToClose,
+                        transition: _vm.transition
+                    },
+                    on: {
+                        "before-open": _vm.beforeOpened,
+                        "before-close": _vm.beforeClosed,
+                        opened: function($event) {
+                            _vm.$emit("opened", $event);
+                        },
+                        closed: function($event) {
+                            _vm.$emit("closed", $event);
+                        }
+                    }
+                }, [ _c("div", {
+                    staticClass: "dialog-content"
+                }, [ _vm.params.title ? _c("div", {
+                    staticClass: "dialog-c-title",
+                    domProps: {
+                        innerHTML: _vm._s(_vm.params.title || "")
+                    }
+                }, [ _c("button", {
+                    staticClass: "vue-dialog-button",
+                    staticStyle: {
+                        float: "right"
+                    },
+                    style: _vm.buttonStyle,
+                    attrs: {
+                        type: "button"
+                    },
+                    on: {
+                        click: function($event) {
+                            $event.stopPropagation(), _vm.click(_vm.i, $event);
+                        }
+                    }
+                }, [ _vm._v("\r\n          X\r\n        ") ]) ]) : _vm._e(), _vm._v(" "), _c("div", {
+                    staticClass: "dialog-c-text",
+                    domProps: {
+                        innerHTML: _vm._s(_vm.params.text || "")
+                    }
+                }) ]), _vm._v(" "), _vm.buttons ? _c("div", {
+                    staticClass: "vue-dialog-buttons"
+                }, _vm._l(_vm.buttons, function(button, i) {
+                    return _c("button", {
+                        key: i,
+                        class: button.class || "vue-dialog-button",
+                        style: _vm.buttonStyle,
+                        attrs: {
+                            type: "button"
+                        },
+                        domProps: {
+                            innerHTML: _vm._s(button.title)
+                        },
+                        on: {
+                            click: function($event) {
+                                $event.stopPropagation(), _vm.click(i, $event);
+                            }
+                        }
+                    }, [ _vm._v("\r\n    " + _vm._s(button.title) + "\r\n") ]);
+                })) : _c("div", {
+                    staticClass: "vue-dialog-buttons-none"
+                }) ]);
             },
             staticRenderFns: []
         }, module.exports.render._withStripped = !0;
@@ -783,10 +929,10 @@
                     class: _vm.backgroundClickClass,
                     on: {
                         mousedown: function($event) {
-                            $event.stopPropagation(), _vm.onBackgroundClick($event);
+                            return $event.stopPropagation(), _vm.onBackgroundClick($event);
                         },
                         touchstart: function($event) {
-                            $event.stopPropagation(), _vm.onBackgroundClick($event);
+                            return $event.stopPropagation(), _vm.onBackgroundClick($event);
                         }
                     }
                 }, [ _c("div", {

@@ -25,6 +25,16 @@ var getType = value => {
       type: value,
       value: 0
     }
+  }else if (value === 'lg') {
+      return {
+          type: 'px',
+          value: 900
+      }
+  }else if (value === 'sm') {
+      return {
+          type: 'px',
+          value: 300
+      }
   }
 
   for (var i = 0; i < types.length; i++) {
