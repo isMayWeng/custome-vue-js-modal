@@ -240,16 +240,18 @@ There is also a ssr build with css file extracted. Take a look in /dist folder.
 | Name      | Required | Type          | Default     | Description |
 | ---       | ---      | ---           | ---         | ---         |
 | name      | true  | [String, Number] |             | Name of the modal |
+| title      | false  | String |             | Title of the modal when the modal can display the header. |
+| showHeader      | false  | Boolean |             | If true, modal will display the header with the title and close button |
 | delay     | false | Number           | 0           | Delay between showing overlay and actual modal box |
 | resizable | false | Boolean          | false       | If true, allows to resize modal window, keeping it in the center of the screen. |
 | adaptive  | false | Boolean          | false       | If true, modal box will try to adapt to the window size |
 | draggable | false | [Boolean, String]| false       | If true, modal box will be draggable. |
 | scrollable | false | Boolean         | false       | If `height` property is `auto` and the modal height exceeds window height - you will be able to scroll modal |
 | reset     | false | Boolean          | false       | Resets position and size before showing modal |
-| clickToClose | false | Boolean       | true        | If set to `false`, it will not be possible to close modal by clicking on the background |
+| clickToClose | false | Boolean       | false        | If set to `false`, it will not be possible to close modal by clicking on the background |
 | transition| false | String           |             | Transition name |
 | classes   | false | [String, Array]  | 'v--modal'| Classes that will be applied to the actual modal box, if not specified, the default 'vue--modal' class will be applied |
-| width     | false | [String, Number] | 600         | Width in pixels or percents (e.g. 50 or "50px", "50%") |
+| width     | false | [String, Number] | 600         | Width in pixels or percents (e.g. 50 or "50px", "50%") or `"lg"`(900px), `"sm"`(300px) |
 | height    | false | [String, Number] | 300         | Height in pixels or percents (e.g. 50 or "50px", "50%") or `"auto"` |
 | minWidth  | false | Number (px)      | 0           | The minimum width to which modal can be resized  |
 | minHeight | false | Number (px)      | 0           | The minimum height to which modal can be resized |
@@ -266,6 +268,7 @@ There is also a ssr build with css file extracted. Take a look in /dist folder.
 | opened       | Emits after modal became visible or started transition |
 | before-close | Emits before modal is going to be closed. Can be stopped from the event listener calling `event.stop()` (example: you are creating a text editor, and want to stop closisng and ask user to correct mistakes if text is not valid)
 | closed       | Emits right before modal is destoyed |
+| cancel       | Emits right before modal is destoyed |
 
 Example:
 ```vue
@@ -457,7 +460,7 @@ Check out my other projects:
 To run an example:
 ```sh
 # Clone repo
-git clone https://github.com/euvl/vue-js-modal.git
+git clone https://github.com/isMayWeng/custome-vue-js-modal.git
 
 # Run unit tests
 npm run unit
