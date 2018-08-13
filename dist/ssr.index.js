@@ -571,7 +571,8 @@
                     var eventName = state ? "opened" : "closed", event = this.genEventObject({
                         state: state
                     });
-                    this.isCloseNotCancel || (eventName = "cancel"), this.$emit(eventName, event), this.isCloseNotCancel = !1;
+                    state || this.isCloseNotCancel || (eventName = "cancel"), this.$emit(eventName, event), 
+                    this.isCloseNotCancel = !1;
                 },
                 updateRenderedHeight: function() {
                     this.$refs.modal && (this.modal.renderedHeight = this.$refs.modal.getBoundingClientRect().height);

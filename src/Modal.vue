@@ -601,7 +601,7 @@
 
                 let eventName = state ? 'opened' : 'closed'
                 const event = this.genEventObject({state})
-                if(!this.isCloseNotCancel){
+                if(!state && !this.isCloseNotCancel){
                     eventName = 'cancel'
                 }
                 this.$emit(eventName, event)
