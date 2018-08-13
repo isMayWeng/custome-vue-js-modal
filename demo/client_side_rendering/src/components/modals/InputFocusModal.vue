@@ -1,6 +1,7 @@
 <template>
   <modal name="input-focus-modal"
          :height="150"
+         :clickToClose="true"
          :adaptive="true"
          @opened="opened">
     <div style="padding: 30px; text-align: center">

@@ -5,6 +5,7 @@
          :max-height="400"
          width="80%"
          height="50%"
+         :clickToClose="true"
          @before-open="beforeOpen">
     <div style="padding:30px; text-align: center">
       Hello!

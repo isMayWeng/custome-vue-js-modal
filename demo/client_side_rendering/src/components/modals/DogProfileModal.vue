@@ -4,6 +4,7 @@
          transition="scale"
          :height="260"
          :width="260"
+         :clickToClose="true"
          @opened="opened">
     <div slot="top-right" class="ct-top-right">
       HIDE THE DOGGY
